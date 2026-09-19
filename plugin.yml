@@ -1,0 +1,8 @@
+name: libasynCurl
+version: 1.0.0
+api: 5.0.0
+main: poggit\libasynCurl\LibAsynCurlPlugin
+author: NetherGames
+description: Asynchronous Curl library for PocketMine-MP with await-generator support
+depend:
+  - AwaitGenerator
