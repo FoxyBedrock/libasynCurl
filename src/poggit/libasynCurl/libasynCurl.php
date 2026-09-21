@@ -89,7 +89,7 @@ final class libasynCurl{
 	public static function get(string $page, int $timeout = 10, array $headers = []): \Generator
 	{
 		return Await::promise(function($resolve, $reject) use ($page, $timeout, $headers): void {
-			self::$threadPool->submitTask(new CurlGetTask($page, $timeout, $headers, function(?InternetRequestResult $response) use ($resolve, $reject): void {
+			self::$threadPool->submitTask(new CurlGetTask($page, $timeout, $headers, function(?InternetRequestResult $response) use ($page, $resolve, $reject): void {
 				if($response === null){
 					$reject(new \RuntimeException("GET request to {$page} failed"));
 					return;
@@ -111,7 +111,7 @@ final class libasynCurl{
 	public static function post(string $page, array|string $args, int $timeout = 10, array $headers = []): \Generator
 	{
 		return Await::promise(function($resolve, $reject) use ($page, $args, $timeout, $headers): void {
-			self::$threadPool->submitTask(new CurlPostTask($page, $args, $timeout, $headers, function(?InternetRequestResult $response) use ($resolve, $reject): void {
+			self::$threadPool->submitTask(new CurlPostTask($page, $args, $timeout, $headers, function(?InternetRequestResult $response) use ($page, $resolve, $reject): void {
 				if($response === null){
 					$reject(new \RuntimeException("POST request to {$page} failed"));
 					return;
@@ -133,7 +133,7 @@ final class libasynCurl{
 	public static function put(string $page, array|string $args, int $timeout = 10, array $headers = []): \Generator
 	{
 		return Await::promise(function($resolve, $reject) use ($page, $args, $timeout, $headers): void {
-			self::$threadPool->submitTask(new CurlPutTask($page, $args, $timeout, $headers, function(?InternetRequestResult $response) use ($resolve, $reject): void {
+			self::$threadPool->submitTask(new CurlPutTask($page, $args, $timeout, $headers, function(?InternetRequestResult $response) use ($page, $resolve, $reject): void {
 				if($response === null){
 					$reject(new \RuntimeException("PUT request to {$page} failed"));
 					return;
@@ -155,7 +155,7 @@ final class libasynCurl{
 	public static function delete(string $page, array|string $args, int $timeout = 10, array $headers = []): \Generator
 	{
 		return Await::promise(function($resolve, $reject) use ($page, $args, $timeout, $headers): void {
-			self::$threadPool->submitTask(new CurlDeleteTask($page, $args, $timeout, $headers, function(?InternetRequestResult $response) use ($resolve, $reject): void {
+			self::$threadPool->submitTask(new CurlDeleteTask($page, $args, $timeout, $headers, function(?InternetRequestResult $response) use ($page, $resolve, $reject): void {
 				if($response === null){
 					$reject(new \RuntimeException("DELETE request to {$page} failed"));
 					return;
